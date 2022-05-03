@@ -20,11 +20,20 @@ menu.addEventListener("click", () => {
         video.style.opacity = 1;
     }else {
         video.pause()
-        btn.className='far fa-pause-circle'
+        btn.className='far fa-play-circle'
+        video.style.opacity = .5;
     }
  }
 
  btn.addEventListener("click", ()=> {
-     playPause()
-     
-     })
+    playPause()
+    
+    })
+    video.addEventListener("timeupdate", () => {
+        const barWidth = video.currentTime / video.duration
+        bar.style.width = `${barWidth * 100}%`
+        if(video.ended){
+            btn.className = "far fa-play-circle"
+            video.style.opacity = '.3'
+        }
+    })
